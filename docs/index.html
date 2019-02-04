@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
+    <title>GitHubSearch</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico">
+    <script defer src="main.dart.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="pure-g text-center">
+      <div class="pure-u-1">
+        <h2 id="title"></h2>
+      </div>
+
+      <div class="pure-u-1">
+        <div class="pure-u-1 search">
+              <div class="pure-u-1 search">
+                <form class="pure-form search__form">
+                  <input id="search-text" class="search__text" type="text" placeholder="Search to ...">
+                  <select
+                    id="search-language"
+                    name="l"
+                    class="form-select js-advanced-search-prefix"
+                    data-search-prefix="language:"
+                  >
+                    <option value="">Any Language</option>
+                    <optgroup id="popular-languages" label="Popular"></optgroup>
+                    <optgroup id="other-languages" label="Everything else"></optgroup>
+                  </select>
+                  <button id="search-btn" class="pure-button search__btn">Search</button>
+              </form>
+          </div>
+          <div class="pure-u-1">
+            <h3>Result:</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
