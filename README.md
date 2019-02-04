@@ -14,7 +14,7 @@ webdev serve --live-reload
 
 ### Compiles and minifies for production
 ```
-webdev build
+webdev build --output docs
 ```
 
 ## License
