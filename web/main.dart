@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:convert' as convert;
 import 'package:http/browser_client.dart';
 
 // curl https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
@@ -8,6 +9,7 @@ void main() {
   var title = querySelector('#title');
   var popularLanguages = querySelector('#popular-languages');
   var otherLanguages = querySelector('#other-languages');
+
   InputElement searchText = querySelector('#search-text');
   ButtonElement searchBtn = querySelector('#search-btn');
   SelectElement languageFilter = querySelector('#search-language');
@@ -75,7 +77,57 @@ String getOtherLanguagesHTML() {
 void search(url) async {
   var client = new BrowserClient();
   var response = await client.get(url);
+  var result = querySelector('#result');
+  var reposCount = querySelector('#repos-count');
+
+  StringBuffer sb = new StringBuffer();
 
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
+
+  var jsonResponse = convert.jsonDecode(response.body);
+  var itemCount = jsonResponse['items'];
+  var totalCount = jsonResponse['total_count'];
+  print('>>>');
+  print('>>>');
+  print('>>>');
+  print('>>>');
+  print("Total count: $totalCount.");
+  reposCount.setInnerHtml('($totalCount)');
+  // print("Number of books about http: $itemCount.");
+
+
+  // var res = json.decode(response.body);
+  // var totalCount = res.total_count;
+  // var items = res.items;
+  // print(totalCount[0]);
+  // print(items[0]);
+
+
+  for (var repo in itemCount) {
+    sb.write(generateRepoElement(repo));
+  }
+
+//   ```dart
+// new Map<String, dynamic>.from(snapshot.value);
+// ```
+
+
+  result.setInnerHtml(sb.toString());
+}
+
+String convertStars(stars) {
+  if (stars < 1000) {
+    return stars.toString();
+  } else {
+    return '${stars.toStringAsFixed(1)}k';
+  }
+}
+
+String generateRepoElement(repo) {
+  String language = repo.language;
+  String stars = convertStars(repo.stargazers_count);
+  return """
+    ${language}, ${stars}
+    """;
 }
